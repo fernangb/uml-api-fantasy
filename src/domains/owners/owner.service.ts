@@ -16,6 +16,10 @@ export class OwnerService {
     return this.ownerRepository.find({ order: { name: 'ASC' } });
   }
 
+  async findByName(name: string): Promise<Owner | undefined> {
+    return this.ownerRepository.findOne({ name });
+  }
+
   async create(data: CreateOwnerDto) {
     const owner = await this.ownerRepository.findOne({ name: data.name });
 

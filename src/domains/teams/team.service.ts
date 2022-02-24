@@ -17,6 +17,10 @@ export class TeamService {
     return this.teamRepository.find({ order: { name: 'ASC' } });
   }
 
+  async findByOwner(ownerId: string): Promise<Team[]> {
+    return this.teamRepository.find({ ownerId });
+  }
+
   async create(data: CreateTeamDto) {
     // const team = await this.teamRepository.findOne({ name: data.name });
 

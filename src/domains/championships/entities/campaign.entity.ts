@@ -1,3 +1,4 @@
+import { Owner } from 'src/domains/owners/owner.entity';
 import {
   Column,
   CreateDateColumn,
@@ -8,21 +9,17 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Owner } from '../owner/owner.entity';
 
-@Entity({ name: 'teams' })
-export class Team {
+@Entity({ name: 'campaigns' })
+export class Campaign {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  name: string;
+  championshipId: string;
 
   @Column()
-  initials: string;
-
-  @Column()
-  country: string;
+  teamId: string;
 
   @Column({ default: 0 })
   points: number;
