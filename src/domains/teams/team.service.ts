@@ -89,4 +89,10 @@ export class TeamService {
 
     return teams;
   }
+
+  validateChampionship(initials: string[], maxSize: number): boolean {
+    if (initials.length !== maxSize) return false;
+
+    return true;
+  }
 }

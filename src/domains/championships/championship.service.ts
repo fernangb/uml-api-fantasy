@@ -35,6 +35,14 @@ export class ChampionshipService {
 
     if (!championshipFormat) throw new BadRequestException('Formato inválido');
 
+    const isValidNumberOfTeams = this.teamService.validateChampionship(
+      teamsInitials,
+      championshipFormat.teamsNumber,
+    );
+
+    if (!isValidNumberOfTeams)
+      throw new BadRequestException('Número de times inválido');
+
     const validTeams = await this.teamService.getTeams(teamsInitials);
 
     return this.championshipRepository.save(
