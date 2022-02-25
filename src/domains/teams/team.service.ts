@@ -22,10 +22,6 @@ export class TeamService {
   }
 
   async create(data: CreateTeamDto) {
-    // const team = await this.teamRepository.findOne({ name: data.name });
-
-    // if (team) throw new BadRequestException('Dono já cadastrado');
-
     if (await this.hasName(data.name))
       throw new BadRequestException('Time já cadastrado');
 

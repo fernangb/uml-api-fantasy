@@ -1,47 +1,47 @@
-import { Owner } from 'src/domains/owners/owner.entity';
-import { Team } from 'src/domains/teams/team.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  JoinTable,
-  ManyToMany,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'championship_types' })
-export class ChampionshipType {
+@Entity({ name: 'championship_formats' })
+export class ChampionshipFormat {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ default: 'default' })
   name: string;
 
-  @Column({ default: 16 })
+  @Column({ default: 'default' })
+  type: string;
+
+  @Column({ name: 'is_active', default: true })
+  isActive: boolean;
+
+  @Column({ name: 'teams' })
   teamsNumber: number;
 
-  @Column({ default: 3 })
+  @Column({ name: 'owners' })
   ownersNumber: number;
 
-  @Column({ default: 4 })
+  @Column({ name: 'groups' })
   groupsNumber: number;
 
-  @Column({ default: 4 })
+  @Column({ name: 'teams_per_group' })
   teamsPerGroup: number;
 
-  @Column({ default: 2 })
+  @Column({ name: 'max_same_owner_teams_per_group', default: 2 })
   maxSameOwnerTeamsPerGroup: number;
 
-  @Column({ default: 3 })
+  @Column({ name: 'group_rounds' })
   groupRounds: number;
 
-  @Column({ default: 1 })
+  @Column({ name: 'playoffs_plays' })
   playoffsPlays: number;
 
-  @Column({ default: 1 })
+  @Column({ name: 'final_plays' })
   finalPlays: number;
 
   @CreateDateColumn({ name: 'created_at' })

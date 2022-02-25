@@ -1,9 +1,21 @@
 import { Module } from '@nestjs/common';
-import { ChampionshipService } from './championship.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { OwnerModule } from '../owners/owner.module';
+import { TeamModule } from '../teams/team.module';
+import { ChampionshipFormatModule } from './championship-format.module';
 import { ChampionshipController } from './championship.controller';
+import { ChampionshipService } from './championship.service';
+import { Championship } from './entities/championship.entity';
 
 @Module({
+  imports: [
+    TypeOrmModule.forFeature([Championship]),
+    ChampionshipFormatModule,
+    OwnerModule,
+    TeamModule,
+  ],
   controllers: [ChampionshipController],
   providers: [ChampionshipService],
+  exports: [ChampionshipService],
 })
 export class ChampionshipModule {}
