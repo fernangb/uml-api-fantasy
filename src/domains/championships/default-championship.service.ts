@@ -1,12 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Owner } from '../owners/owner.entity';
 import { OwnerService } from '../owners/owner.service';
 import { Team } from '../teams/team.entity';
 import { TeamService } from '../teams/team.service';
+import { ChampionshipService } from './championship.service';
 import { CreateChampionshipDto } from './dto/create-championship.dto';
-import { UpdateChampionshipDto } from './dto/update-championship.dto';
 import { Championship } from './entities/championship.entity';
 import IChampionshipService from './interfaces/championship.interface';
 
@@ -19,6 +18,8 @@ export class DefaultChampionshipService implements IChampionshipService {
     private ownerService: OwnerService,
     @Inject(TeamService)
     private teamService: TeamService,
+    @Inject(ChampionshipService)
+    private championshipService: ChampionshipService,
   ) {}
 
   validateNumberOfTeams(teams: Team[]): boolean {
@@ -29,7 +30,7 @@ export class DefaultChampionshipService implements IChampionshipService {
     return true;
   }
 
-  create(createChampionshipDto: CreateChampionshipDto): Promise<Championship> {
-    throw new Error('Method not implemented.');
+  async create(data: CreateChampionshipDto): Promise<Championship> {
+    return this.championshipService.create(data);
   }
 }

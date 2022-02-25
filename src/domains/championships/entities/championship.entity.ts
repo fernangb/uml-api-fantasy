@@ -1,4 +1,3 @@
-import { Owner } from 'src/domains/owners/owner.entity';
 import { Team } from 'src/domains/teams/team.entity';
 import {
   Column,
@@ -11,14 +10,22 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { ChampionshipFormat } from './championship-format.entity';
 
 @Entity({ name: 'championships' })
 export class Championship {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ default: 'default' })
-  type: string;
+  @Column()
+  name: string;
+
+  @Column({ name: 'format_id' })
+  formatId: string;
+
+  @ManyToOne(() => ChampionshipFormat, (o) => o.name, { eager: true })
+  @JoinColumn({ name: 'ownerId' })
+  format: ChampionshipFormat;
 
   @ManyToMany(() => Team, { cascade: true, eager: true })
   @JoinTable()

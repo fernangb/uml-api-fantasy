@@ -21,6 +21,10 @@ export class TeamService {
     return this.teamRepository.find({ ownerId });
   }
 
+  async findByName(name: string): Promise<Team | undefined> {
+    return this.teamRepository.findOne({ name });
+  }
+
   async create(data: CreateTeamDto) {
     if (await this.hasName(data.name))
       throw new BadRequestException('Time já cadastrado');
@@ -60,5 +64,20 @@ export class TeamService {
     );
 
     return actualTeams.sort((a, b) => (a > b ? a : b));
+  }
+
+  async getTeams(names: string[]): Promise<Team[]> {
+    const teams = [];
+
+    for (const name of names) {
+      const teamExists = await this.findByName(name);
+
+      if (!teamExists)
+        throw new BadRequestException(`Time ${name} não cadastrado`);
+
+      teams.push(teamExists);
+    }
+
+    return teams;
   }
 }
