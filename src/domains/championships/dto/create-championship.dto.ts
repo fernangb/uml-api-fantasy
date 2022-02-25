@@ -1,5 +1,5 @@
 export class CreateChampionshipDto {
-  teams: string[];
+  teamsInitials: string[];
   format: string;
   name: string;
 }

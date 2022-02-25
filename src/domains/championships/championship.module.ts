@@ -5,6 +5,7 @@ import { TeamModule } from '../teams/team.module';
 import { ChampionshipFormatModule } from './championship-format.module';
 import { ChampionshipController } from './championship.controller';
 import { ChampionshipService } from './championship.service';
+import { DefaultChampionshipService } from './default-championship.service';
 import { Championship } from './entities/championship.entity';
 
 @Module({
@@ -15,7 +16,7 @@ import { Championship } from './entities/championship.entity';
     TeamModule,
   ],
   controllers: [ChampionshipController],
-  providers: [ChampionshipService],
+  providers: [ChampionshipService, DefaultChampionshipService],
   exports: [ChampionshipService],
 })
 export class ChampionshipModule {}

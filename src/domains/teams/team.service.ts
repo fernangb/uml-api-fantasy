@@ -25,6 +25,10 @@ export class TeamService {
     return this.teamRepository.findOne({ name });
   }
 
+  async findByInitials(initials: string): Promise<Team | undefined> {
+    return this.teamRepository.findOne({ initials });
+  }
+
   async create(data: CreateTeamDto) {
     if (await this.hasName(data.name))
       throw new BadRequestException('Time já cadastrado');
@@ -66,14 +70,19 @@ export class TeamService {
     return actualTeams.sort((a, b) => (a > b ? a : b));
   }
 
-  async getTeams(names: string[]): Promise<Team[]> {
+  async getTeams(initials: string[]): Promise<Team[]> {
     const teams = [];
 
-    for (const name of names) {
-      const teamExists = await this.findByName(name);
+    if (initials.length === 0)
+      throw new BadRequestException('Nenhum time foi preenchido');
+
+    const upperCaseInitials = initials.map((initial) => initial.toUpperCase());
+
+    for (const initial of upperCaseInitials) {
+      const teamExists = await this.findByInitials(initial);
 
       if (!teamExists)
-        throw new BadRequestException(`Time ${name} não cadastrado`);
+        throw new BadRequestException(`Time ${initial} não cadastrado`);
 
       teams.push(teamExists);
     }

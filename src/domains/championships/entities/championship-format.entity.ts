@@ -11,10 +11,10 @@ export class ChampionshipFormat {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ default: 'default' })
+  @Column()
   name: string;
 
-  @Column({ default: 'default' })
+  @Column()
   type: string;
 
   @Column({ name: 'is_active', default: true })

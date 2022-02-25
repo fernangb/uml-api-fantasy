@@ -24,7 +24,7 @@ export class Championship {
   formatId: string;
 
   @ManyToOne(() => ChampionshipFormat, (o) => o.name, { eager: true })
-  @JoinColumn({ name: 'ownerId' })
+  @JoinColumn({ name: 'formatId' })
   format: ChampionshipFormat;
 
   @ManyToMany(() => Team, { cascade: true, eager: true })

@@ -23,7 +23,7 @@ export class ChampionshipService {
   async create({
     name,
     format,
-    teams,
+    teamsInitials,
   }: CreateChampionshipDto): Promise<Championship> {
     const championship = await this.findByName(name);
 
@@ -35,7 +35,7 @@ export class ChampionshipService {
 
     if (!championshipFormat) throw new BadRequestException('Formato inválido');
 
-    const validTeams = await this.teamService.getTeams(teams);
+    const validTeams = await this.teamService.getTeams(teamsInitials);
 
     return this.championshipRepository.save(
       this.championshipRepository.create({
@@ -48,5 +48,9 @@ export class ChampionshipService {
 
   async findByName(name: string): Promise<Championship | undefined> {
     return this.championshipRepository.findOne({ name });
+  }
+
+  async findAll(): Promise<Championship[]> {
+    return this.championshipRepository.find();
   }
 }
