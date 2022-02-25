@@ -10,22 +10,31 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { ChampionshipFormat } from '../formats/entities/championship-format.entity';
+import { Championship } from '../../entities/championship.entity';
 
-@Entity({ name: 'championships' })
-export class Championship {
+@Entity({ name: 'championship_groups' })
+export class ChampionshipGroup {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
   name: string;
 
-  @Column({ name: 'format_id' })
-  formatId: string;
+  @Column()
+  rounds: number;
 
-  @ManyToOne(() => ChampionshipFormat, (o) => o.name, { eager: true })
-  @JoinColumn({ name: 'format_id' })
-  format: ChampionshipFormat;
+  @Column({ name: 'teams' })
+  teamsNumber: number;
+
+  @Column({ name: 'classificated_teams' })
+  classicatedTeams: number;
+
+  @Column({ name: 'championship_id' })
+  championshipId: string;
+
+  @ManyToOne(() => Championship, (o) => o.name, { eager: true })
+  @JoinColumn({ name: 'championship_id' })
+  championship: Championship;
 
   @ManyToMany(() => Team, { cascade: true, eager: true })
   @JoinTable()

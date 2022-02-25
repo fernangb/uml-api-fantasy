@@ -95,4 +95,14 @@ export class TeamService {
 
     return true;
   }
+
+  validateChampionshipGroup(team: Team[], maxSize: number): boolean {
+    if (team.length !== maxSize) return false;
+
+    return true;
+  }
+
+  getRandomTeam(teams: Team[]): Team {
+    return teams[Math.floor(Math.random() * teams.length)];
+  }
 }

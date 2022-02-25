@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateChampionshipFormatDto } from './dto/create-championship-format.dto';
+import { CreateChampionshipFormatDto } from '../dto/create-championship-format.dto';
 import { ChampionshipFormat } from './entities/championship-format.entity';
 
 @Injectable()
