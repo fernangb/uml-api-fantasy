@@ -24,3 +24,5 @@ export const fakeTeam = {
   createdAt: new Date(),
   updatedAt: new Date(),
 } as Team;
+
+export const fakeTeamsGroup = [fakeTeam, fakeTeam, fakeTeam, fakeTeam];

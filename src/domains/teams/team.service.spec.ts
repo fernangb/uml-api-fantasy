@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { fakeTeam, fakeTeamsGroup } from './mocks/teams.mocks';
 import { Team } from './team.entity';
 import { TeamService } from './team.service';
 
@@ -55,6 +56,33 @@ describe('TeamService', () => {
       const maxSize = 4;
 
       expect(service.validateChampionship(teams, maxSize)).toBe(true);
+    });
+  });
+
+  describe('validateChampionshipGroup', () => {
+    it('should be able to return false if teams number is different than max size', () => {
+      const teams = [] as Team[];
+      const maxSize = 4;
+
+      expect(service.validateChampionshipGroup(teams, maxSize)).toBe(false);
+    });
+
+    it('should be able to return true if teams number is equal than max size', () => {
+      const teams = fakeTeamsGroup as Team[];
+      const maxSize = 4;
+
+      expect(service.validateChampionshipGroup(fakeTeamsGroup, maxSize)).toBe(
+        true,
+      );
+    });
+  });
+
+  describe('getRandomTeam', () => {
+    it('should be able to find a random team', () => {
+      const teams = fakeTeamsGroup;
+      const response = fakeTeam;
+
+      expect(service.getRandomTeam(teams)).toStrictEqual(response);
     });
   });
 });
