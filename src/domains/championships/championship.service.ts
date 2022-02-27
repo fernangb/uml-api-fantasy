@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { OwnerService } from '../owners/owner.service';
 import { TeamService } from '../teams/team.service';
-import { ChampionshipFormatService } from './championship-format.service';
 import { CreateChampionshipDto } from './dto/create-championship.dto';
 import { Championship } from './entities/championship.entity';
+import { ChampionshipFormatService } from './formats/championship-format.service';
 
 @Injectable()
 export class ChampionshipService {

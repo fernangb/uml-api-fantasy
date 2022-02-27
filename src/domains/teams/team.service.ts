@@ -1,7 +1,7 @@
 import { BadRequestException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { POINTS } from 'src/constants';
+// import { POINTS } from 'src/constants';
 import { Repository } from 'typeorm';
 import { CreateTeamDto } from './dtos/create-team.dto';
 import { Team } from './team.entity';
@@ -51,24 +51,24 @@ export class TeamService {
     return !!team;
   }
 
-  async calculatePoints() {
-    const teams = await this.teamRepository.find();
+  // async calculatePoints() {
+  //   const teams = await this.teamRepository.find();
 
-    const actualTeams = teams.map(
-      (team) =>
-        (team.points =
-          team.titles * POINTS.TITLE +
-          (team.finals - team.titles) * POINTS.FINAL +
-          team.semifinals * POINTS.SEMIFINAL +
-          team.quarterFinals * POINTS.QUARTER_FINALS +
-          team.groupStage * POINTS.GROUP_STAGE +
-          team.victories * POINTS.VICTORY +
-          team.draws * POINTS.DRAW +
-          team.defeats * POINTS.LOSS),
-    );
+  //   const actualTeams = teams.map(
+  //     (team) =>
+  //       (team.points =
+  //         team.titles * POINTS.TITLE +
+  //         (team.finals - team.titles) * POINTS.FINAL +
+  //         team.semifinals * POINTS.SEMIFINAL +
+  //         team.quarterFinals * POINTS.QUARTER_FINALS +
+  //         team.groupStage * POINTS.GROUP_STAGE +
+  //         team.victories * POINTS.VICTORY +
+  //         team.draws * POINTS.DRAW +
+  //         team.defeats * POINTS.LOSS),
+  //   );
 
-    return actualTeams.sort((a, b) => (a > b ? a : b));
-  }
+  //   return actualTeams.sort((a, b) => (a > b ? a : b));
+  // }
 
   async getTeams(initials: string[]): Promise<Team[]> {
     const teams = [];
